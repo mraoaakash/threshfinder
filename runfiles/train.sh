@@ -20,7 +20,7 @@ do
         python /home/aakash.rao_asp24/threshfinder/modelling/train.py \
             --base_path /home/aakash.rao_asp24/threshfinder \
             --model_name $i \
-            --epochs 1 \
+            --epochs 30 \
             --batch_size 8 \
             --lr 0.000001 \
             --threshold 10 \
