@@ -6,7 +6,7 @@ import argparse
 import matplotlib.pyplot as plt
 import tqdm
 
-['AMBIGUOUS' 'nonTIL_stromal' 'other_nucleus' 'sTIL' 'tumor_any']
+classes_inset = ['AMBIGUOUS' 'nonTIL_stromal' 'other_nucleus' 'sTIL' 'tumor_any']
 
 mapping_class = {
     'nonTIL_stromal': 0,
@@ -32,9 +32,14 @@ def extract_patches(base_path, size=314):
     data_out_path = os.path.join(base_path, 'data/nucls', 'processed')
     im_out_path = os.path.join(data_out_path, 'images')
     mask_out_path = os.path.join(data_out_path, 'masks')
+    df = pd.DataFrame(columns=['image_path', 'mask_path'])
 
+
+    im_arr = []
+    mask_arr = []
     os.makedirs(im_out_path, exist_ok=True)
-    
+    os.makedirs(mask_out_path, exist_ok=True)
+    print('Extracting patches from {} images'.format(len(data_df)))
     for index, row in tqdm.tqdm(data_df.iterrows(), total=len(data_df)):
         image_path = row['image_path']
         mask_path = row['mask_path']
@@ -46,23 +51,30 @@ def extract_patches(base_path, size=314):
         imzeros = np.zeros((image.shape[0], image.shape[1]))
         for index, row in mask.iterrows():
             xmin,  ymin,  xmax,  ymax, = row['xmin'], row['ymin'], row['xmax'], row['ymax']
-            imzeros[ymin:ymax, xmin:xmax] = row['super_classification']
+            imzeros[ymin:ymax, xmin:xmax] = int(row['super_classification'])+1
 
         image = image[0:size, 0:size]
         mask = imzeros[0:size, 0:size]
 
+        # Visualization for debugging purposes:
         # plt.figure()
         # plt.imshow(image)
         # plt.imshow(mask, alpha=0.2)
         # plt.show()
+
+        im_arr.append(os.path.join(im_out_path, os.path.basename(image_path)))
+        mask_arr.append(os.path.join(mask_out_path,os.path.basename(image_path)))
 
         cv2.imwrite(os.path.join(im_out_path, os.path.basename(image_path)), image)
         cv2.imwrite(os.path.join(mask_out_path,os.path.basename(image_path)), mask)
 
 
 
+
         # break
-        
+    df['image_path'] = im_arr
+    df['mask_path'] = mask_arr
+    df.to_csv(os.path.join(data_out_path, 'nucls_processed.csv'))
     pass
 
 

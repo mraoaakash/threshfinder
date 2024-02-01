@@ -28,6 +28,8 @@ def organize_nucls(nucl_path):
     df = pd.DataFrame(columns=['image_path', 'mask_path'])
     imarr = []
     maskarr = []
+
+    print('Organizing {} images'.format(len(image_list)))
     for image in tqdm.tqdm(image_list, total=len(image_list)):
         img_path = os.path.join(image_path, image)
         msk_path = os.path.join(mask_path, image.split('.png')[0] + '.csv')
