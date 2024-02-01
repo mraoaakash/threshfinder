@@ -205,6 +205,7 @@ def train(
     checkpoint = ModelCheckpoint('model{epoch:08d}.h5', period=5) 
 
     history = model.fit( train_generator, epochs=epochs, validation_data=validation_generator, verbose=verbose,allbacks=[checkpoint])
+    model.save(os.path.join(model_base_path, 'model_final.h5'))
 
     print(history.history)
     json = os.path.join(model_base_path, 'history.json')
