@@ -1,11 +1,23 @@
-python /Users/mraoaakash/Documents/research/research-personal/threshfinder/tools/organize_nucls.py \
-    -i /Users/mraoaakash/Documents/research/research-personal/threshfinder/data/NuclsEvalSet
+#! /bin/bash
+#PBS -N RUN_ORGANIZER
+#PBS -o RUN_ORGANIZER_out.log
+#PBS -e RUN_ORGANIZER_err.log
+#PBS -l ncpus=10
+#PBS -q gpu
+
+module load compiler/anaconda3
 
 
-python /Users/mraoaakash/Documents/research/research-personal/threshfinder/tools/extract_patches.py \
-    -b /Users/mraoaakash/Documents/research/research-personal/threshfinder
+eval "$(conda shell.bash hook)" 
+
+python /home/aakash.rao_asp24/threshfinder/tools/organize_nucls.py \
+    -i /home/aakash.rao_asp24/threshfinder/data/NuclsEvalSet
+
+
+python /home/aakash.rao_asp24/threshfinder/tools/extract_patches.py \
+    -b /home/aakash.rao_asp24/threshfinder
 
 
 
-python /Users/mraoaakash/Documents/research/research-personal/threshfinder/tools/get_percs.py \
-    -b /Users/mraoaakash/Documents/research/research-personal/threshfinder 
+python /home/aakash.rao_asp24/threshfinder/tools/get_percs.py \
+    -b /home/aakash.rao_asp24/threshfinder 
