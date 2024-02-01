@@ -123,7 +123,7 @@ def train(
     if mode =="initialize":
         sys.exit(0)
 
-        
+
     csv = os.path.join(base_path, 'data/nucls/ind_percs/thresholds', f'perc_{str(threshold).zfill(3)}.csv')
     train_df, valid_df, test_df = gen_data_dfs(csv, fold)
 
@@ -239,6 +239,7 @@ if __name__ == '__main__':
     argparser.add_argument('--input_shape', type=tuple, default=(314, 314, 3))
     argparser.add_argument('--threshold', type=int, default=10)
     argparser.add_argument('--fold', type=int, default=1)
+    argparser.add_argument('--mode', type=str, default='train')
     args = argparser.parse_args()
 
     train(**vars(args))
