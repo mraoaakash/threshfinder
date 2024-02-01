@@ -4,3 +4,8 @@ python /Users/mraoaakash/Documents/research/research-personal/threshfinder/tools
 
 python /Users/mraoaakash/Documents/research/research-personal/threshfinder/tools/extract_patches.py \
     -b /Users/mraoaakash/Documents/research/research-personal/threshfinder
+
+
+
+python /Users/mraoaakash/Documents/research/research-personal/threshfinder/tools/get_percs.py \
+    -b /Users/mraoaakash/Documents/research/research-personal/threshfinder 
