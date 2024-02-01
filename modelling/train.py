@@ -79,8 +79,51 @@ def train(
             save_weights=True, 
             save_history=True, 
             verbose=1,
+            mode = 'train'
         ):
     
+
+
+    basemodels = {
+        'Xception': Xception,
+        'ResNet50': ResNet50,
+        'InceptionV3': InceptionV3,
+        'VGG16': VGG16,
+        'VGG19': VGG19,
+        'MobileNetV2': MobileNetV2
+    }
+    base = basemodels[model_name](weights='imagenet', include_top=False, input_shape=input_shape)
+
+    model = Sequential()
+    model.add(base)
+    model.add(GlobalAveragePooling2D())
+    model.add(Flatten())
+    model.add(Dense(1024, activation='relu'))
+    model.add(Dropout(0.5))
+    model.add(Dense(512, activation='relu'))
+    model.add(Dropout(0.5))
+    model.add(Dense(256, activation='relu'))
+    model.add(Dropout(0.5))
+    model.add(Dense(4, activation='sigmoid'))
+    model.summary()
+
+
+    optimizer_list = {
+        'adam': Adam(lr=lr),
+        'sgd': SGD(lr=lr),
+        'rmsprop': RMSprop(lr=lr)
+    }
+
+    model.compile(
+        optimizer=optimizer_list[optimizer],
+        loss=loss,
+        metrics=metrics
+    )
+
+    if mode =="initialize":
+        sys.exit(0)
+
+        
     csv = os.path.join(base_path, 'data/nucls/ind_percs/thresholds', f'perc_{str(threshold).zfill(3)}.csv')
     train_df, valid_df, test_df = gen_data_dfs(csv, fold)
 
@@ -157,43 +200,6 @@ def train(
         seed=42
     )
 
-
-
-    basemodels = {
-        'Xception': Xception,
-        'ResNet50': ResNet50,
-        'InceptionV3': InceptionV3,
-        'VGG16': VGG16,
-        'VGG19': VGG19,
-        'MobileNetV2': MobileNetV2
-    }
-    base = basemodels[model_name](weights='imagenet', include_top=False, input_shape=input_shape)
-
-    model = Sequential()
-    model.add(base)
-    model.add(GlobalAveragePooling2D())
-    model.add(Flatten())
-    model.add(Dense(1024, activation='relu'))
-    model.add(Dropout(0.5))
-    model.add(Dense(512, activation='relu'))
-    model.add(Dropout(0.5))
-    model.add(Dense(256, activation='relu'))
-    model.add(Dropout(0.5))
-    model.add(Dense(4, activation='sigmoid'))
-    model.summary()
-
-
-    optimizer_list = {
-        'adam': Adam(lr=lr),
-        'sgd': SGD(lr=lr),
-        'rmsprop': RMSprop(lr=lr)
-    }
-
-    model.compile(
-        optimizer=optimizer_list[optimizer],
-        loss=loss,
-        metrics=metrics
-    )
 
     history = model.fit( train_generator, epochs=epochs, validation_data=validation_generator, verbose=verbose)
 
