@@ -25,7 +25,7 @@ do
             --lr 0.000001 \
             --threshold 10 \
             --fold $fold \
-            --mode initialize \
+            # --mode train \
 
     done
 done
