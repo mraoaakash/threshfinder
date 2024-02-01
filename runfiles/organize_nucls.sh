@@ -9,6 +9,7 @@ module load compiler/anaconda3
 
 
 eval "$(conda shell.bash hook)" 
+conda activate threshfinder
 
 python /home/aakash.rao_asp24/threshfinder/tools/organize_nucls.py \
     -i /home/aakash.rao_asp24/threshfinder/data/NuclsEvalSet

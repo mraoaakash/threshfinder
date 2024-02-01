@@ -9,6 +9,7 @@ module load compiler/anaconda3
 
 
 eval "$(conda shell.bash hook)" 
+conda activate threshfinder
 
 
 
