@@ -202,7 +202,7 @@ def train(
 
 
     # save every 5 epochs
-    checkpoint = ModelCheckpoint('model{epoch:08d}.h5', period=5) 
+    checkpoint = ModelCheckpoint(f'{model_base_path}/model.h5', period=5)
 
     history = model.fit( train_generator, epochs=epochs, validation_data=validation_generator, verbose=verbose, callbacks=[checkpoint])
     model.save(os.path.join(model_base_path, 'model_final.h5'))
