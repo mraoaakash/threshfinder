@@ -11,7 +11,7 @@ module load compiler/anaconda3
 eval "$(conda shell.bash hook)" 
 conda activate threshfinder
 
-for thresh in {1..100}
+for thresh in {5..55}
 do
     for i in {"Xception","ResNet50","InceptionV3","VGG16","VGG19","MobileNetV2"}
     do
