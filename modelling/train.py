@@ -128,7 +128,7 @@ def train(
     train_df, valid_df, test_df = gen_data_dfs(csv, fold)
 
 
-    model_base_path = os.path.join(base_path, 'outputs/models', model_name, f'fold_{fold}')
+    model_base_path = os.path.join(base_path, 'outputs/models', model_name, f'thresh_{str(threshold).zfill(3)}', f'fold_{fold}')
     os.makedirs(model_base_path, exist_ok=True)
 
     data_save_path = os.path.join(model_base_path, 'data')
@@ -245,5 +245,4 @@ if __name__ == '__main__':
     argparser.add_argument('--fold', type=int, default=1)
     argparser.add_argument('--mode', type=str, default='train')
     args = argparser.parse_args()
-
     train(**vars(args))
