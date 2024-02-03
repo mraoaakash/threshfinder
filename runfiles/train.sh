@@ -23,7 +23,7 @@ do
                 --epochs 30 \
                 --batch_size 8 \
                 --lr 0.000001 \
-                --threshold $ thresh \
+                --threshold $thresh \
                 --fold $fold \
                 # --mode train \
 
