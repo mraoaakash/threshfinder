@@ -1,10 +1,11 @@
+export PATH=/home/aakashrao/miniconda3/bin:$PATH
+conda activate cellvit_env
+
 INPRAWDIR=/mnt/storage/aakashrao/cifsShare/input_raw
 INDIR=/mnt/storage/aakashrao/cifsShare/images
 TEMPDIR=/mnt/storage/aakashrao/cifsShare/temp
 OUTDIR=/mnt/storage/aakashrao/cifsShare/output
 
-export /home/aakashrao/miniconda3/bin:$PATH
-conda activate cellvit_env
 
 
 # Move all files from raw to input
