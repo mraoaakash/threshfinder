@@ -1,10 +1,3 @@
-
-# eval line 
-eval $(conda shell.bash hook)
-export PATH=/home/aakashrao/miniconda3/bin:$PATH
-conda activate cellvit_env
-
-
 INPRAWDIR=/mnt/storage/aakashrao/cifsShare/input_raw
 INDIR=/mnt/storage/aakashrao/cifsShare/images
 TEMPDIR=/mnt/storage/aakashrao/cifsShare/temp
@@ -25,7 +18,7 @@ do
     echo $file_name
 
 
-    python3 /home/aakashrao/research/research-MICCAI/CellViT/preprocessing/patch_extraction/main_extraction.py \
+    sudo python3 /home/aakashrao/research/research-MICCAI/CellViT/preprocessing/patch_extraction/main_extraction.py \
         --wsi_paths $file \
         --output_path $TEMPDIR \
         --patch_size 1024 \
@@ -33,7 +26,7 @@ do
 
     
     # inference step
-    python3 /home/aakashrao/research/research-MICCAI/CellViT/cell_segmentation/inference/cell_detection.py \
+    sudo python3 /home/aakashrao/research/research-MICCAI/CellViT/cell_segmentation/inference/cell_detection.py \
         --model /home/aakashrao/research/research-MICCAI/CellViT/models/pretrained/CellViT/CellViT-SAM-H-x40.pth \
         --batch_size 4 \
         --outdir_subdir $OUTDIR/$file_name \
@@ -44,7 +37,7 @@ do
 
 
     # clear temp
-    rm -r $TEMPDIR/*
+    sudo rm -r $TEMPDIR/*
     break
     
 done
