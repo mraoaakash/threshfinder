@@ -37,7 +37,7 @@ do
 
 
     # clear temp
-    sudo rm -r $TEMPDIR/*
+    rm -r $TEMPDIR/*
     break
     
 done
