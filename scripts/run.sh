@@ -20,12 +20,12 @@ do
 
     python3 /home/aakashrao/research/research-MICCAI/CellViT/preprocessing/patch_extraction/main_extraction.py \
         --wsi_paths $file \
-        --output_dir $TEMPDIR \
+        --output_path $TEMPDIR \
         --patch_size 1024 \
         --overlap 6.25 \
 
     
-    inference step
+    # inference step
     python3 /home/aakashrao/research/research-MICCAI/CellViT/cell_segmentation/inference/cell_detection.py \
         --model /home/aakashrao/research/research-MICCAI/CellViT/models/pretrained/CellViT/CellViT-SAM-H-x40.pth \
         --batch_size 4 \
