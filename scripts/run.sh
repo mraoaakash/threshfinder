@@ -1,5 +1,9 @@
+
+# eval line 
+eval $(conda shell.bash hook)
 export PATH=/home/aakashrao/miniconda3/bin:$PATH
 conda activate cellvit_env
+
 
 INPRAWDIR=/mnt/storage/aakashrao/cifsShare/input_raw
 INDIR=/mnt/storage/aakashrao/cifsShare/images
