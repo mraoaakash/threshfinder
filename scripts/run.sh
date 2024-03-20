@@ -18,7 +18,7 @@ do
     echo $file_name
 
 
-    sudo python3 /home/aakashrao/research/research-MICCAI/CellViT/preprocessing/patch_extraction/main_extraction.py \
+    python3 /home/aakashrao/research/research-MICCAI/CellViT/preprocessing/patch_extraction/main_extraction.py \
         --wsi_paths $file \
         --output_path $TEMPDIR \
         --patch_size 1024 \
@@ -26,7 +26,7 @@ do
 
     
     # inference step
-    sudo python3 /home/aakashrao/research/research-MICCAI/CellViT/cell_segmentation/inference/cell_detection.py \
+    python3 /home/aakashrao/research/research-MICCAI/CellViT/cell_segmentation/inference/cell_detection.py \
         --model /home/aakashrao/research/research-MICCAI/CellViT/models/pretrained/CellViT/CellViT-SAM-H-x40.pth \
         --batch_size 4 \
         --outdir_subdir $OUTDIR/$file_name \
