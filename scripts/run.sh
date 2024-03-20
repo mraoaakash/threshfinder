@@ -20,7 +20,7 @@ do
 
     python3 /home/aakashrao/research/research-MICCAI/CellViT/preprocessing/patch_extraction/main_extraction.py \
         --wsi_paths $file \
-        --output_path $TEMPDIR \
+        --output_path "$TEMPDIR" \
         --patch_size 1024 \
         --overlap 6.25 \
 
