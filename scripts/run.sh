@@ -47,6 +47,7 @@ do
     # inference step
     python3 /home/aakash.rao_asp24/thesis-supporters/CellViT/cell_segmentation/inference/cell_detection.py \
         --model /home/aakash.rao_asp24/thesis-supporters/CellViT/models/pretrained/CellViT/CellViT-SAM-H-x40.pth \
+        --magnification 40 \
         --batch_size 4 \
         --outdir_subdir $OUTDIR/$file_name \
         --geojson \
