@@ -1,13 +1,17 @@
-INPRAWDIR=/mnt/storage/aakashrao/cifsShare/input_raw
-INDIR=/mnt/storage/aakashrao/cifsShare/images
-TEMPDIR=/mnt/storage/aakashrao/cifsShare/temp
-OUTDIR=/mnt/storage/aakashrao/cifsShare/output
+INPRAWDIR=/storage/aakash.rao_asp24/research/research-MICCAI/input_raw
+INDIR=/storage/aakash.rao_asp24/research/research-MICCAI/images
+TEMPDIR=/storage/aakash.rao_asp24/research/research-MICCAI/temp
+OUTDIR=/storage/aakash.rao_asp24/research/research-MICCAI/output
 
+
+
+eval "$(conda shell.bash hook)"
+conda activate Cellvit_env
 
 
 # Move all files from raw to input
 # find $INPRAWDIR -name '*.svs' | grep -v 'abdx' | xargs -I{} mv {} $INDIR
-# find /mnt/storage/aakashrao/cifsShare/input_raw/ -name '*.svs' | grep -v 'abdx' | xargs -I{} mv {} /mnt/storage/aakashrao/cifsShare/images
+# find /storage/aakash.rao_asp24/research/research-MICCAI/input_raw/ -name '*.svs' | grep -v 'abdx' | xargs -I{} mv {} /storage/aakash.rao_asp24/research/research-MICCAI/images
 
 
 for file in $INDIR/*.svs
@@ -18,7 +22,7 @@ do
     echo $file_name
 
 
-    python3 /home/aakashrao/research/research-MICCAI/CellViT/preprocessing/patch_extraction/main_extraction.py \
+    python3 /home/aakash.rao_asp24/thesis-supporters/CellViT/preprocessing/patch_extraction/main_extraction.py \
         --wsi_paths $file \
         --output_path $TEMPDIR \
         --patch_size 1024 \
@@ -26,8 +30,8 @@ do
 
     
     # inference step
-    python3 /home/aakashrao/research/research-MICCAI/CellViT/cell_segmentation/inference/cell_detection.py \
-        --model /home/aakashrao/research/research-MICCAI/CellViT/models/pretrained/CellViT/CellViT-SAM-H-x40.pth \
+    python3 /home/aakash.rao_asp24/thesis-supporters/CellViT/cell_segmentation/inference/cell_detection.py \
+        --model /home/aakash.rao_asp24/thesis-supporters/CellViT/models/pretrained/CellViT/CellViT-SAM-H-x40.pth \
         --batch_size 4 \
         --outdir_subdir $OUTDIR/$file_name \
         --geojson \
