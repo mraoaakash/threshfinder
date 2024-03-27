@@ -11,6 +11,7 @@ INPRAWDIR=/storage/aakash.rao_asp24/research/research-MICCAI/input_raw
 INDIR=/storage/aakash.rao_asp24/research/research-MICCAI/images
 TEMPDIR=/storage/aakash.rao_asp24/research/research-MICCAI/temp
 OUTDIR=/storage/aakash.rao_asp24/research/research-MICCAI/output
+MASKPATH=/storage/aakash.rao_asp24/research/research-MICCAI/masks
 
 
 
@@ -37,6 +38,8 @@ do
         --patch_size 1024 \
         --patch_overlap 6.25 \
 
+    mkdir $MASKPATH/$file_name
+    mv $TEMPDIR/$file_name/mask.png $MASKPATH/$file_name/mask.png
     
     # inference step
     python3 /home/aakash.rao_asp24/thesis-supporters/CellViT/cell_segmentation/inference/cell_detection.py \
