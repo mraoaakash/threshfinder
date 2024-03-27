@@ -39,7 +39,9 @@ do
         --patch_overlap 6.25 \
 
     mkdir $MASKPATH/$file_name
-    mv $TEMPDIR/$file_name/mask.png $MASKPATH/$file_name/mask.png
+    mv $TEMPDIR/$file_name/mask.png $MASKPATH/$file_name
+    mv $TEMPDIR/$file_name/thumbnail.png $MASKPATH/$file_name
+    mv $TEMPDIR/$file_name/thumbnails $MASKPATH/$file_name
     
     # inference step
     python3 /home/aakash.rao_asp24/thesis-supporters/CellViT/cell_segmentation/inference/cell_detection.py \
