@@ -1,3 +1,12 @@
+#! /bin/bash
+#PBS -N CellViT_Threshfinder
+#PBS -o CellViT_Threshfinder_out.log
+#PBS -e CellViT_Threshfinder_err.log
+#PBS -l ncpus=50
+#PBS -q gpu
+
+
+
 INPRAWDIR=/storage/aakash.rao_asp24/research/research-MICCAI/input_raw
 INDIR=/storage/aakash.rao_asp24/research/research-MICCAI/images
 TEMPDIR=/storage/aakash.rao_asp24/research/research-MICCAI/temp
