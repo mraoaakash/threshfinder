@@ -58,6 +58,6 @@ do
 
     # clear temp
     rm -r $TEMPDIR/*
-    break
+    # break
     
 done
