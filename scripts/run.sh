@@ -31,6 +31,13 @@ do
     file_name=${file_path%.*}
     echo $file_name
 
+    if [ -d "$OUTDIR/$file_name" ]; then
+        echo "Output directory exists"
+        # continue with the next iteration
+        continue
+    else
+        mkdir -p $OUTDIR/$file_name
+    fi
 
     python3 /home/aakash.rao_asp24/thesis-supporters/CellViT/preprocessing/patch_extraction/main_extraction.py \
         --wsi_paths $file \
@@ -44,13 +51,6 @@ do
     mkdir -p $MASKPATH/$file_name/thumbnails
     mv $TEMPDIR/$file_name/thumbnails/* $MASKPATH/$file_name/thumbnails/
 
-    if [ -d "$OUTDIR/$file_name" ]; then
-        echo "Output directory exists"
-        # continue with the next iteration
-        continue
-    else
-        mkdir -p $OUTDIR/$file_name
-    fi
     
     # inference step
     python3 /home/aakash.rao_asp24/thesis-supporters/CellViT/cell_segmentation/inference/cell_detection.py \
