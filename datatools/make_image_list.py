@@ -44,8 +44,13 @@ def TCGADataset(data_dir, outdir, crop_size=256, token_num=75):
         wsi = data_file["wsi"][idx].decode("utf-8")
         file_name = wsi + "_" + folder_name
         # print(folder_name)
-        til_score = train_til[idx] if idx in indices_train else test_til[idx]
-        tumor_score = train_tumor[idx] if idx in indices_train else test_tumor[idx]
+        try:
+            til_score = train_til[idx]
+            tumor_score = train_tumor[idx]
+        except:
+            til_score = test_til[idx]
+            tumor_score = test_tumor[idx]
+            
         print(til_score, tumor_score)
 
     
