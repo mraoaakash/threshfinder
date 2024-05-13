@@ -30,9 +30,9 @@ def TCGADataset(data_dir, outdir, crop_size=256, token_num=75):
     train_tumor = train["prob_tumor"]
     test_tumor = test["prob_tumor"]
 
-    print(train_til.shape)
+    print(type(train_til))
     print(train_tumor.shape)
-    
+
 
 
     # for idx in tqdm.tqdm(indices):
