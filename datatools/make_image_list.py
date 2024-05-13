@@ -43,7 +43,10 @@ def TCGADataset(data_dir, outdir, crop_size=256, token_num=75):
         folder_name = data_file["folder_name"][idx].decode("utf-8")
         wsi = data_file["wsi"][idx].decode("utf-8")
         file_name = wsi + "_" + folder_name
-        print(folder_name)
+        # print(folder_name)
+        til_score = train_til[idx] if idx in indices_train else test_til[idx]
+        tumor_score = train_tumor[idx] if idx in indices_train else test_tumor[idx]
+        print(til_score, tumor_score)
 
     
 if __name__ == "__main__":
@@ -51,6 +54,7 @@ if __name__ == "__main__":
     parser.add_argument('--data_dir', type=str, default="data", help='Path to the data directory')
     parser.add_argument('--outdir', type=str, default="data", help='Path to the output directory')
     args = parser.parse_args()
+
 
     # idk
 
