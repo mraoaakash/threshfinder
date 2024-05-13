@@ -6,9 +6,10 @@ import h5py
 import tqdm
 import io
 from PIL import Image
+import argparse
 
 
-def TCGADataset(data_dir, token_num, outdir, crop_size=256):
+def TCGADataset(data_dir, outdir, crop_size=256, token_num=75):
 
     os.makedirs(outdir, exist_ok=True)
 
@@ -30,3 +31,12 @@ def TCGADataset(data_dir, token_num, outdir, crop_size=256):
     #     wsi = data_file["wsi"][idx].decode("utf-8")
 
     
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description='Create image list for training and testing')
+    parser.add_argument('--data_dir', type=str, default="data", help='Path to the data directory')
+    parser.add_argument('--outdir', type=str, default="data", help='Path to the output directory')
+    parser.add_argument('--crop_size', type=int, default=256, help='Size of the cropped image')
+    parser.add_argument('--token_num', type=int, default=75, help='Number of tokens')
+    args = parser.parse_args()
+
+    TCGADataset(args.data_dir, args.outdir, args.crop_size, args.token_num)

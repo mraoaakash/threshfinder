@@ -1,4 +1,4 @@
-SHAREPATH=/mnt/storage/aakashrao/cifsShare
+SHAREPATH=/mnt/storage/aakashrao/cifsShare/PathLDM/inputs/TCGA_Dataset
 
 python datatools/make_image_list.py \
     --data_dir $BASEPATH \
