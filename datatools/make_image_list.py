@@ -31,28 +31,27 @@ def TCGADataset(data_dir, outdir, crop_size=256, token_num=75):
     train_tumor = train["prob_tumor"]
     test_tumor = test["prob_tumor"]
 
-    print(train_til[0])
 
 
 
 
 
 
-    # for idx in tqdm.tqdm(indices):
+    for idx in tqdm.tqdm(indices):
         
-    #     tile = data_file["X"][idx]
-    #     folder_name = data_file["folder_name"][idx].decode("utf-8")
-    #     wsi = data_file["wsi"][idx].decode("utf-8")
-    #     file_name = wsi + "_" + folder_name
-    #     # print(folder_name)
-    #     try:
-    #         til_score = train_til[idx]
-    #         tumor_score = train_tumor[idx]
-    #     except:
-    #         til_score = test_til[idx]
-    #         tumor_score = test_tumor[idx]
+        tile = data_file["X"][idx]
+        folder_name = data_file["folder_name"][idx].decode("utf-8")
+        wsi = data_file["wsi"][idx].decode("utf-8")
+        file_name = wsi + "_" + folder_name
+        # print(folder_name)
+        try:
+            til_score = train_til[folder_name]
+            tumor_score = train_tumor[folder_name]
+        except:
+            til_score = test_til[folder_name]
+            tumor_score = test_tumor[folder_name]
 
-    #     print(til_score, tumor_score)
+        print(til_score, tumor_score)
 
     
 if __name__ == "__main__":
