@@ -30,12 +30,7 @@ def TCGADataset(data_dir, outdir, crop_size=256, token_num=75):
         tile = data_file["X"][idx]
         folder_name = data_file["folder_name"][idx].decode("utf-8")
         wsi = data_file["wsi"][idx].decode("utf-8")
-        try:
-            TIL = train["prob_til"][idx]
-            print(TIL)
-            break
-        except:
-            pass
+        
 
     
 if __name__ == "__main__":
