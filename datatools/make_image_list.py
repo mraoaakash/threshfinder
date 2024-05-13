@@ -45,8 +45,8 @@ def TCGADataset(data_dir, outdir, crop_size=256, token_num=75):
         file_name = wsi + "_" + folder_name
         # print(folder_name)
         try:
-            til_score = train_til[folder_name]
-            tumor_score = train_tumor[folder_name]
+            til_score = test_til[folder_name]
+            tumor_score = test_tumor[folder_name]
             print(til_score, tumor_score)
         except:
             pass
