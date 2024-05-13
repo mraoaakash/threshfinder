@@ -37,4 +37,6 @@ if __name__ == "__main__":
     parser.add_argument('--outdir', type=str, default="data", help='Path to the output directory')
     args = parser.parse_args()
 
+    # idk
+
     TCGADataset(args.data_dir, args.outdir)
