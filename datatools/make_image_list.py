@@ -26,12 +26,10 @@ def TCGADataset(data_dir, outdir, crop_size=256, token_num=75):
     print(train.files)
     train_til = train["prob_til"]
     test_til = test["prob_til"]
-    til = np.concatenate([train_til, test_til], axis=0)
 
 
     train_tumor = train["prob_tumor"]
     test_tumor = test["prob_tumor"]
-    tumor = np.concatenate([train_tumor, test_tumor], axis=0)
 
 
 
