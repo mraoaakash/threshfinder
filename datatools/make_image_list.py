@@ -42,8 +42,7 @@ def TCGADataset(data_dir, outdir, crop_size=256, token_num=75):
         tile = data_file["X"][idx]
         folder_name = data_file["folder_name"][idx].decode("utf-8")
         wsi = data_file["wsi"][idx].decode("utf-8")
-        lookup_name = folder_name + "_" + tile
-        file_name = wsi + "_" + lookup_name
+        file_name = wsi + "_" + folder_name
         print(file_name)
 
     
