@@ -47,10 +47,10 @@ def TCGADataset(data_dir, outdir, crop_size=256, token_num=75):
         try:
             til_score = train_til[folder_name]
             tumor_score = train_tumor[folder_name]
+            print(til_score, tumor_score)
         except:
             pass
 
-        print(til_score, tumor_score)
 
     
 if __name__ == "__main__":
