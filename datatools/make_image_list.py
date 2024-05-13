@@ -23,6 +23,7 @@ def TCGADataset(data_dir, outdir, crop_size=256, token_num=75):
     indices = indices_test
 
     print(data_file.keys())
+    print(train.files)
 
     # for idx in tqdm.tqdm(indices):
         
