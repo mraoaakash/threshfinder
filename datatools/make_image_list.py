@@ -43,7 +43,7 @@ def TCGADataset(data_dir, outdir, crop_size=256, token_num=75):
         folder_name = data_file["folder_name"][idx].decode("utf-8")
         wsi = data_file["wsi"][idx].decode("utf-8")
         file_name = wsi + "_" + folder_name
-        print(file_name)
+        print(folder_name)
 
     
 if __name__ == "__main__":
