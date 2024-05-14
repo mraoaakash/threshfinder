@@ -24,32 +24,60 @@ def TCGADataset(data_dir, outdir, crop_size=256, token_num=75):
 
     print(data_file.keys())
     print(train.files)
-    train_til = train["prob_til"]
     test_til = test["prob_til"]
 
-
-    train_tumor = train["prob_tumor"]
     test_tumor = test["prob_tumor"]
 
-
-
-
-
-
-
+    df = pd.DataFrame(columns=["file_name", "til_score", "tumor_score"])
     for idx in tqdm.tqdm(indices):
-        
         tile = data_file["X"][idx]
         folder_name = data_file["folder_name"][idx].decode("utf-8")
         wsi = data_file["wsi"][idx].decode("utf-8")
         file_name = wsi + "_" + folder_name
-        # print(folder_name)
-        try:
-            til_score = test_til[folder_name]
-            tumor_score = test_tumor[folder_name]
-            print(til_score, tumor_score)
-        except:
-            pass
+        til_score = test_til[folder_name]
+        tumor_score = test_tumor[folder_name]
+        df = pd.concat([df, pd.DataFrame({"file_name": [file_name], "til_score": [til_score], "tumor_score": [tumor_score]})])
+    
+    train_til = train["prob_til"]
+    train_tumor = train["prob_tumor"]
+    
+    for idx in tqdm.tqdm(indices):
+        tile = data_file["X"][idx]
+        folder_name = data_file["folder_name"][idx].decode("utf-8")
+        wsi = data_file["wsi"][idx].decode("utf-8")
+        file_name = wsi + "_" + folder_name
+        til_score = train_til[folder_name]
+        tumor_score = train_tumor[folder_name]
+        df = pd.concat([df, pd.DataFrame({"file_name": [file_name], "til_score": [til_score], "tumor_score": [tumor_score]})])
+    
+    
+    df.to_csv(os.path.join(outdir, "set.csv"), index=False)
+
+def split(DF, outdir, train_size=0.8, folds=3):
+    outdir = os.path.join(outdir, "folds")
+    train_outdir = os.path.join(outdir, "train")
+    test_outdir = os.path.join(outdir, "test")
+
+    indices = np.array(DF.index)
+    np.random.seed(43)
+    np.random.shuffle(indices)
+    train_size = int(len(indices) * train_size)
+
+    train_indices = indices[:train_size]
+    test_indices = indices[train_size:]
+
+    for i in range(folds):
+        fold_train = train_indices[i*train_size//folds:(i+1)*train_size//folds]
+        fold_test = test_indices[i*len(test_indices)//folds:(i+1)*len(test_indices)//folds]
+
+        train_df = DF.iloc[fold_train]
+        test_df = DF.iloc[fold_test]
+
+        train_df.to_csv(os.path.join(train_outdir, f"train_{i}.csv"), index=False)
+        test_df.to_csv(os.path.join(test_outdir, f"test_{i}.csv"), index=False)
+
+
+
 
 
     
@@ -60,6 +88,6 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
 
-    # idk
+    set_path = os.path.join(args.outdir, "set.csv")
+    data_df = TCGADataset(args.data_dir, args.outdir) if not os.exists(set_path) else pd.read_csv(set_path)
 
-    TCGADataset(args.data_dir, args.outdir)
